@@ -82,7 +82,26 @@ db.Movie.findAll({
             }).catch(err => res.status(500).json(err));
 
 */
+/* CODIGO DE NICOLAS LIVINGSTON
 
+
+'buscar': (req, res) => {
+        db.Movie.findAll({
+            include: ['genre'],
+            where: {
+                title: {[db.Sequelize.Op.like] : req.body.titulo}
+            }
+        })
+            .then(async movies => {
+                 if(movies.length > 0) {
+                    res.render('moviesDetail.ejs', {movie:movies[0]});
+                }else{
+
+                    let movie = await fetch(API+"&t="+ req.body.titulo).then(resp => resp.json())
+                    res.render('moviesDetailOmdb', {movie})
+                }
+            }).catch(err => res.status(500).json(err));
+*/
 
     //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
